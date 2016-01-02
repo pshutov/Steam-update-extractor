@@ -61,6 +61,24 @@ namespace Steam_Update_Creator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to appmanifest_*.acf.
+        /// </summary>
+        internal static string AppmanifestFile {
+            get {
+                return ResourceManager.GetString("AppmanifestFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .manifest.
+        /// </summary>
+        internal static string ManifestExtension {
+            get {
+                return ResourceManager.GetString("ManifestExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BaseInstallFolder_\d+&quot;\s*&quot;.*?(?=&quot;).
         /// </summary>
         internal static string RegexBaseInstallFolderAll {

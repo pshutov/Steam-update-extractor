@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppmanifestFile" xml:space="preserve">
+    <value>appmanifest_*.acf</value>
+  </data>
+  <data name="ManifestExtension" xml:space="preserve">
+    <value>.manifest</value>
+  </data>
   <data name="RegexBaseInstallFolderAll" xml:space="preserve">
     <value>BaseInstallFolder_\d+"\s*".*?(?=")</value>
   </data>

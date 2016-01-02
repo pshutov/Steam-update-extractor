@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,15 +29,25 @@ namespace Steam_Update_Creator {
         }
 
         public string CheckSteamPath() {
-            string path = OSBitChecker.Is64Bit() ? Resources.SoftwareRegPathX64 : Resources.SoftwareRegPathX32;
-            path += string.Concat('\\', Resources.SteamRegPath);
+            bool x64 = OSBitChecker.Is64Bit();
+            string path = x64 ? Resources.SoftwareRegPathX64 : Resources.SoftwareRegPathX32;
+            string result = CheckSteamPath(path);
+            if (string.IsNullOrWhiteSpace(result)) {
+                path = x64 ? Resources.SoftwareRegPathX32 : Resources.SoftwareRegPathX64;
+                result = CheckSteamPath(path);
+            }
+            return result;
+        }
+
+        public string CheckSteamPath(string path) {
+            path = Path.Combine(path, Resources.SteamRegPath);
             string name = Resources.SteamRegKeyName;
             return RegReader.ReadValue(path, name);
         }
 
         public IList<string> ReadSteamAppsFolderList() {
             IList<string> resultList = new List<string>();
-            string path = string.Concat(_steamPath, '\\', Resources.SteamSteamAppsDefaultPath);
+            string path = Path.Combine(_steamPath, Resources.SteamSteamAppsDefaultPath);
             if (Directory.Exists(path)) {
                 resultList.Add(path);
             }
@@ -53,7 +64,7 @@ namespace Steam_Update_Creator {
                         Regex.Match(match.ToString(),
                             Resources.RegexBaseInstallFolderSingle).Value.Replace("\\\\", "\\");
                     if (Directory.Exists(temp)) {
-                        temp += "\\steamapps\\";
+                        temp = Path.Combine(temp, Resources.SteamSteamAppsDefaultPath);
                         if (Directory.Exists(temp)) {
                             resultList.Add(temp);
                         }
@@ -68,7 +79,7 @@ namespace Steam_Update_Creator {
 
             foreach (var steamapps in _steamAppsFolderList) {
                 if (Directory.Exists(steamapps)) {
-                    string[] files = Directory.GetFiles(steamapps, "appmanifest_*.acf");
+                    string[] files = Directory.GetFiles(steamapps, Resources.AppmanifestFile);
                     foreach (var file in files) {
                         string text = File.ReadAllText(file);
 
@@ -100,12 +111,12 @@ namespace Steam_Update_Creator {
                                 var temp = Regex.Matches(tempMatch.ToString(), "\\d+");
                                 if (temp.Count > 1) {
                                     mountedDepots.Add(Path.Combine(_steamPath, Resources.SteamDepotcachePath,
-                                        (string.Concat(temp[0], '_', temp[1], '.', "manifest"))));
+                                        (string.Concat(temp[0], '_', temp[1], Resources.ManifestExtension))));
                                 }
                             }
                         }
 
-                        long lastUpdated = 0;
+                        long lastUpdated;
                         long.TryParse(lastUpdatedStr, out lastUpdated);
 
                         var game = new Game {
@@ -122,7 +133,7 @@ namespace Steam_Update_Creator {
                 }
             }
 
-            resultList.Sort((a, b) => a.Name.CompareTo(b.Name));
+            resultList.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
             return resultList;
         }
 

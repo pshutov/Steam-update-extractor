@@ -119,7 +119,7 @@
             this.tbGameManifest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbGameManifest.Location = new System.Drawing.Point(295, 62);
             this.tbGameManifest.Name = "tbGameManifest";
-            this.tbGameManifest.Size = new System.Drawing.Size(301, 20);
+            this.tbGameManifest.Size = new System.Drawing.Size(358, 20);
             this.tbGameManifest.TabIndex = 1;
             this.tbGameManifest.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbGameManifest_MouseDoubleClick);
             // 
@@ -163,7 +163,7 @@
             this.tbGameFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbGameFolder.Location = new System.Drawing.Point(295, 36);
             this.tbGameFolder.Name = "tbGameFolder";
-            this.tbGameFolder.Size = new System.Drawing.Size(301, 20);
+            this.tbGameFolder.Size = new System.Drawing.Size(358, 20);
             this.tbGameFolder.TabIndex = 0;
             this.tbGameFolder.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbGameFolder_MouseDoubleClick);
             // 
@@ -185,7 +185,7 @@
             this.tbGameAppid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tbGameAppid.Location = new System.Drawing.Point(295, 88);
             this.tbGameAppid.Name = "tbGameAppid";
-            this.tbGameAppid.Size = new System.Drawing.Size(301, 20);
+            this.tbGameAppid.Size = new System.Drawing.Size(358, 20);
             this.tbGameAppid.TabIndex = 2;
             this.tbGameAppid.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbGameAppid_MouseDoubleClick);
             // 
@@ -235,7 +235,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Steam Update Creator";
+            this.Text = "Steam Update Creator v0.02";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
